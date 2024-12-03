@@ -1,0 +1,1 @@
+{"polingo_words":{"mappings":{"properties":{"description":{"type":"text"},"english_word":{"type":"keyword"},"japanese_word":{"type":"keyword"}}}}}
