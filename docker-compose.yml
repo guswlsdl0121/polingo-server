@@ -1,0 +1,54 @@
+services:
+  # MySQL 설정
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      MYSQL_DATABASE: polingo_db
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker1234
+      MYSQL_ROOT_PASSWORD: mysql1234
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command:
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+      - '--bind-address=0.0.0.0'
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Elasticsearch 설정
+  elasticsearch:
+    image: elasticsearch:8.13.4  # Spring Boot 3.2.4와 호환되는 버전
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -vq '\"status\":\"red\"'"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
+
+volumes:
+  mysql-data:
+  elasticsearch-data:
