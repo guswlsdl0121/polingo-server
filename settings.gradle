@@ -1,2 +1,2 @@
 rootProject.name = 'polingo'
-include 'infrastructure'
+include 'bootstrap'
