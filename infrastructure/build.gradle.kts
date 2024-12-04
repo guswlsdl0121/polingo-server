@@ -1,4 +1,6 @@
 dependencies {
+    implementation(project(":domain"))
+
     // DB & JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.mysql:mysql-connector-j")
@@ -8,9 +10,11 @@ dependencies {
     // Elasticsearch
     implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
-    // Security
+    // Security & JWT
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 
 
     // Cache
@@ -20,8 +24,6 @@ dependencies {
     // External APIs
     implementation("com.deepl.api:deepl-java:1.7.0")
     implementation("com.google.cloud:google-cloud-speech:4.49.0")
-
-
     implementation("com.google.cloud:google-cloud-texttospeech:2.55.0")
 }
 
