@@ -1,8 +1,9 @@
 dependencies {
     implementation(project(":infrastructure"))
+    implementation(project(":domain"))
+    implementation(project(":webapi"))
 
     implementation("org.springframework.boot:spring-boot-starter")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.bootJar {

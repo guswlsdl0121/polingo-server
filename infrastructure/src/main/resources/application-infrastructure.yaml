@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/polingo_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: docker
+    password: docker1234
+
+  elasticsearch:
+    uris: http://localhost:9200
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
